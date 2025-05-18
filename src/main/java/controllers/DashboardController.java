@@ -211,13 +211,23 @@ public class DashboardController extends HttpServlet {
             e.printStackTrace();
         }
         
+     
+
         BookingModel bookingModel = new BookingModel();
-        Pair<ArrayList<BookingDetailObject>, Integer> abc = bookingModel.getBookingDetailObjects(new BookingObject(), (short)1, (byte)15);
-        ArrayList<BookingDetailObject> booking_list = abc.getValue0();
-        Integer booking_total = abc.getValue1();
-        
-        request.setAttribute("booking_list", booking_list);
-        request.setAttribute("booking_total", booking_total);
+
+
+
+            // Lấy danh sách booking theo phân trang
+            ArrayList<BookingObject> bookings = bookingModel.getBookings();
+
+            // Lấy tổng số bản ghi để tính tổng số trang
+
+
+            // Truyền dữ liệu sang JSP
+            request.setAttribute("booking", bookings);
+      
+         
+
         
         request.getRequestDispatcher("dashboard.jsp").forward(request, response);
         

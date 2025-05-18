@@ -146,7 +146,11 @@ public class BookingModel {
 
     public ArrayList<BookingObject> getBookings() {
         ArrayList<BookingObject> bookingList = new ArrayList<>();
-        String sql = "SELECT * FROM tblbooking";  // You can add WHERE clauses or ORDER BY as needed
+        String sql = "SELECT b.*, r.room_name " +
+                     "FROM tblbooking b " +
+                     "INNER JOIN tblroom r ON b.room_id = r.room_id " +
+                     "ORDER BY b.booking_created_at DESC " +
+                     "LIMIT 10";
 
         try (
             Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
@@ -170,6 +174,9 @@ public class BookingModel {
                 booking.setBookingCreatedAt(rs.getTimestamp("booking_created_at"));
                 booking.setBookingUpdatedAt(rs.getTimestamp("booking_updated_at"));
 
+                // Lấy tên phòng từ bảng tblroom
+                booking.setRoomName(rs.getString("room_name"));
+
                 bookingList.add(booking);
             }
         } catch (SQLException ex) {
@@ -178,6 +185,7 @@ public class BookingModel {
 
         return bookingList;
     }
+
 
     public ArrayList<BookingObject> getBookingObjectsByContact(String uuid) {
         ArrayList<BookingObject> items = new ArrayList<>();
@@ -335,7 +343,11 @@ public class BookingModel {
 
     public ArrayList<BookingObject> getBookingsPaginated(int page, int pageSize) {
         ArrayList<BookingObject> bookingList = new ArrayList<>();
-        String sql = "SELECT * FROM tblbooking ORDER BY booking_created_at DESC LIMIT ? OFFSET ?";
+        String sql = "SELECT b.*, r.room_name " +
+                     "FROM tblbooking b " +
+                     "INNER JOIN tblroom r ON b.room_id = r.room_id " +
+                     "ORDER BY b.booking_created_at DESC " +
+                     "LIMIT ? OFFSET ?";
         int offset = (page - 1) * pageSize;
 
         try (
@@ -363,6 +375,9 @@ public class BookingModel {
                 booking.setBookingCreatedAt(rs.getTimestamp("booking_created_at"));
                 booking.setBookingUpdatedAt(rs.getTimestamp("booking_updated_at"));
 
+                // Lấy tên phòng từ bảng tblroom
+                booking.setRoomName(rs.getString("room_name"));
+
                 bookingList.add(booking);
             }
         } catch (SQLException ex) {
@@ -371,6 +386,7 @@ public class BookingModel {
 
         return bookingList;
     }
+
 
     public static void main(String[] args) {
         BookingModel bookingModel = new BookingModel();

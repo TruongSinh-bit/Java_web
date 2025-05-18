@@ -289,59 +289,40 @@ console.log("${requestScope.avg_rating_today}")
 										Hoạt động đặt phòng gần đây
 									</h5>
 
-									<table class="table table-borderless datatable">
-  							<thead>
-								<tr>
-<!-- 									<th scope="col" class="align-middle">ID</th> -->
-<!-- 									<th scope="col" class="align-middle">Tên khách hàng</th> -->
-									<th scope="col">Tên phòng</th>
-									<th scope="col">Thông tin liên lạc KH</th>
-									<th scope="col">Từ ngày</th>
-									<th scope="col">Đến ngày</th>
-<!-- 									<th scope="col">Số người</th> -->
-<!-- 									<th scope="col">Ghi chú khi đặt phòng</th> -->
-<!-- 									<th scope="col">Bình luận từ khách hàng</th> -->
-<!-- 									<th scope="col">Đánh giá</th> -->
-									<th scope="col">Trạng thái</th>
+										<table class="table datatable">
+								<thead>
+									<tr>
+										<th scope="col" class="align-middle">ID</th>
+										<th scope="col">Mã Phòng</th>
+										    <th scope="col">Tên Phòng</th>
+										<th scope="col">Thông tin liên lạc KH</th>
+										<th scope="col">CCCD</th>
+										<th scope="col">Từ ngày</th>
+										<th scope="col">Đến ngày</th>
+										<th scope="col">Số người</th>
 									
-								</tr>
-							</thead>
-  							<tbody>
-  							<c:forEach var="row" items="${booking_list}">
-							    <tr>
-<%-- 							        <td class="align-middle">${row.bookingId}</td> --%>
-<%-- 							        <td class="align-middle">${row.customerFullname}</td> --%>
-							        <td class="align-middle">${row.roomName}</td>
-									<td class="align-middle">${row.customerContact}</td>
-							        <td class="align-middle">${row.bookingStartDate}</td>
-							        <td class="align-middle">${row.bookingEndDate}</td>
-<%-- 							        <td class="align-middle">${row.bookingPeopleCount}</td> --%>
-<%-- 							        <td class="align-middle">${row.bookingNote}</td> --%>
-<%-- 							        <td class="align-middle">${row.bookingComment}</td> --%>
-<%-- 							        <td class="align-middle">${row.bookingRate}</td> --%>
-							        <td class="align-middle">
-									    <c:choose>
-									        <c:when test="${row.bookingState == 1}">
-									        	<span class="badge bg-primary">Đã chấp nhận</span>
-									        </c:when>
-									        <c:when test="${row.bookingState == 0}">
-									        
-									            <span class="badge bg-warning">Đang chờ</span>
-									            
-									        </c:when>
-									        <c:when test="${row.bookingState == -1}">
-									            <span class="badge bg-secondary">Đã từ chối</span>
-									        </c:when>
-									        <c:otherwise>
-									            Unknown
-									        </c:otherwise>
-									    </c:choose>
-									</td>
-							    </tr>
-							</c:forEach>
+										
+								
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="row" items="${booking}">
+										<tr>
+											<td class="align-middle">${row.bookingId}</td>
+											<td class="align-middle">${row.roomId}</td>
+											     <td class="align-middle">${row.roomName}</td> 
+											<td class="align-middle">${row.customerContact}</td>
+											<td class="align-middle">${row.customerContact1}</td>
+											<td class="align-middle">${row.bookingStartDate}</td>
+											<td class="align-middle">${row.bookingEndDate}</td>
+											<td class="align-middle">${row.bookingPeopleCount}</td>
+										
+									
+										</tr>
+									</c:forEach>
 
-  							</tbody>
-						</table>
+								</tbody>
+							</table>
 
 								</div>
 

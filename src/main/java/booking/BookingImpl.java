@@ -178,14 +178,12 @@ public class BookingImpl extends BasicImpl implements Booking {
     @Override
     public ArrayList<ResultSet> getBookings(BookingObject similar, int at, byte total) {
         StringBuilder sql = new StringBuilder();
-        sql.append("SELECT ")
-           .append("b.*, ")  // All columns from tblbooking
-           .append("r.room_name ")  // Add room's name
-           .append("FROM tblbooking b ")
-           .append("INNER JOIN tblroom r ON b.room_id = r.room_id ")
-           .append("ORDER BY b.booking_id DESC ")
+        sql.append("SELECT b.*, r.room_name ")
+        .append("FROM tblbooking b ")
+        .append("INNER JOIN tblroom r ON b.room_id = r.room_id ")
+        .append("WHERE 1=1 ")
            .append("LIMIT ").append(at).append(", ").append(total).append(";");
-
+         
         // Second query for counting total rows
         sql.append("SELECT COUNT(b.booking_id) AS total FROM tblbooking b;");
 
